@@ -5,6 +5,7 @@ import pickle
 model = pickle.load(open('model.pkl', 'rb'))
 scaler = pickle.load(open('scaler.pkl', 'rb')) 
 
+# Initializing the Flask Application
 app = Flask(__name__)
 
 # Create a route for the homepage
@@ -12,7 +13,7 @@ app = Flask(__name__)
 def home():
     return render_template('index.html')
 
-# Prediction route
+# Prediction route(When a form is submitted, this route will be accessed.)
 @app.route('/predict', methods=['POST'])
 def predict():
     if request.method == 'POST':
@@ -33,6 +34,6 @@ def predict():
         print(f"Prediction: {result}") 
         
         return render_template('index.html', prediction=result)
-
+# This checks if the script is being run directly 
 if __name__ == '__main__':
     app.run(debug=True)
